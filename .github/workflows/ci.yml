@@ -1,0 +1,25 @@
+name: Pruebas del prototipo AGV
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Dependencias
+        run: pip install -r requirements.txt
+      - name: Pruebas del módulo de gestión y del gemelo digital
+        run: python -m pytest -v
+      - name: Pruebas del núcleo del firmware (g++)
+        run: make -C firmware/test
+      - name: Ensayos de simulación
+        run: |
+          python simulacion/frenado_obstaculo.py
+          python simulacion/gemelo_lote.py
