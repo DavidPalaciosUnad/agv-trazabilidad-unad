@@ -1,0 +1,3 @@
+# Bibliotecas de Wokwi (Library Manager)
+PubSubClient
+LiquidCrystal I2C

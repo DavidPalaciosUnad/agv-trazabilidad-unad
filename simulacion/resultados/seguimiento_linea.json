@@ -1,0 +1,76 @@
+{
+  "ganancias": {
+    "kp": 2.0,
+    "kd": 0.08,
+    "ki": 0.0
+  },
+  "combinaciones_evaluadas": 396,
+  "combinaciones_factibles": 381,
+  "escenarios": {
+    "nominal_0.5": {
+      "kp": 2.0,
+      "ki": 0.0,
+      "kd": 0.08,
+      "v": 0.5,
+      "perdida_de_linea": false,
+      "rms_mm": 0.9454674357401459,
+      "max_mm": 2.4065615651598917,
+      "tiempo_s": 25.78
+    },
+    "reducida_0.2": {
+      "kp": 2.0,
+      "ki": 0.0,
+      "kd": 0.08,
+      "v": 0.2,
+      "perdida_de_linea": false,
+      "rms_mm": 3.2745357872933583,
+      "max_mm": 7.842095658123538,
+      "tiempo_s": 64.2
+    },
+    "offset_inicial_20mm": {
+      "kp": 2.0,
+      "ki": 0.0,
+      "kd": 0.08,
+      "v": 0.5,
+      "perdida_de_linea": false,
+      "rms_mm": 2.2285639595148923,
+      "max_mm": 20.0,
+      "tiempo_s": 25.78
+    },
+    "rumbo_inicial_5grados": {
+      "kp": 2.0,
+      "ki": 0.0,
+      "kd": 0.08,
+      "v": 0.5,
+      "perdida_de_linea": false,
+      "rms_mm": 1.0073947863940693,
+      "max_mm": 3.233386045552623,
+      "tiempo_s": 25.78
+    },
+    "sin_derivativo_kd0": {
+      "kp": 2.0,
+      "ki": 0.0,
+      "kd": 0.0,
+      "v": 0.5,
+      "perdida_de_linea": false,
+      "rms_mm": 0.9692997043369861,
+      "max_mm": 2.5149608784921273,
+      "tiempo_s": 25.78
+    },
+    "ganancia_baja_kp1": {
+      "kp": 1.0,
+      "ki": 0.0,
+      "kd": 0.08,
+      "v": 0.5,
+      "perdida_de_linea": false,
+      "rms_mm": 5.026395456076198,
+      "max_mm": 12.402681819685187,
+      "tiempo_s": 25.84
+    }
+  },
+  "robustez_30_semillas": {
+    "perdidas_de_linea": 0,
+    "rms_mm_media": 0.9401082053468071,
+    "max_mm_peor": 3.0303698076971077
+  }
+}

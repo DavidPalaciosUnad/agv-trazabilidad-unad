@@ -1,0 +1,83 @@
+{
+  "parametros": {
+    "v_nominal": 0.5,
+    "v_reducida": 0.2,
+    "d_advertencia": 1.2,
+    "d_proteccion": 0.5,
+    "a_frenado": 1.0,
+    "t_reaccion": 0.1
+  },
+  "distancia_parada_teorica_v_nominal_m": 0.175,
+  "distancia_parada_teorica_v_reducida_m": 0.04,
+  "ensayo_estatico": {
+    "d_obstaculo_inicial_m": 3.0,
+    "holgura_final_m": 0.46,
+    "v_min_en_advertencia": 0.2
+  },
+  "ensayo_intrusion": [
+    {
+      "d_intrusion_m": 0.3,
+      "repeticiones": 30,
+      "detenciones": 30,
+      "holgura_min_m": 0.16,
+      "holgura_media_m": 0.16,
+      "contactos": 0
+    },
+    {
+      "d_intrusion_m": 0.4,
+      "repeticiones": 30,
+      "detenciones": 30,
+      "holgura_min_m": 0.26,
+      "holgura_media_m": 0.26,
+      "contactos": 0
+    },
+    {
+      "d_intrusion_m": 0.5,
+      "repeticiones": 30,
+      "detenciones": 30,
+      "holgura_min_m": 0.36,
+      "holgura_media_m": 0.36,
+      "contactos": 0
+    },
+    {
+      "d_intrusion_m": 0.6,
+      "repeticiones": 30,
+      "detenciones": 30,
+      "holgura_min_m": 0.46,
+      "holgura_media_m": 0.46,
+      "contactos": 0
+    },
+    {
+      "d_intrusion_m": 0.8,
+      "repeticiones": 30,
+      "detenciones": 30,
+      "holgura_min_m": 0.456,
+      "holgura_media_m": 0.472,
+      "contactos": 0
+    },
+    {
+      "d_intrusion_m": 1.0,
+      "repeticiones": 30,
+      "detenciones": 30,
+      "holgura_min_m": 0.452,
+      "holgura_media_m": 0.474,
+      "contactos": 0
+    },
+    {
+      "d_intrusion_m": 1.2,
+      "repeticiones": 30,
+      "detenciones": 30,
+      "holgura_min_m": 0.448,
+      "holgura_media_m": 0.474,
+      "contactos": 0
+    },
+    {
+      "d_intrusion_m": 1.5,
+      "repeticiones": 30,
+      "detenciones": 30,
+      "holgura_min_m": 0.448,
+      "holgura_media_m": 0.476,
+      "contactos": 0
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "semilla": 2026,
+  "ordenes_creadas": 40,
+  "duracion_simulada_s": 2410.0,
+  "intrusiones_simuladas": 6,
+  "indicadores": {
+    "ordenes": {
+      "PENDIENTE": 0,
+      "ASIGNADA": 0,
+      "EN_CURSO": 0,
+      "COMPLETADA": 40,
+      "CANCELADA": 0,
+      "FALLIDA": 0
+    },
+    "traslados_manuales_evitados": 40,
+    "masa_transportada_kg": 1011.9,
+    "distancia_recorrida_m": 684.0,
+    "tiempo_ciclo_medio_s": 51.1,
+    "tiempo_ejecucion_medio_s": 43.9,
+    "tasa_exito": 1.0,
+    "paradas_por_obstaculo": 2,
+    "reducciones_de_velocidad": 3,
+    "paradas_de_emergencia": 1,
+    "fallas_comunicacion": 0,
+    "eventos_registrados": 651
+  },
+  "trazabilidad": {
+    "integra": true,
+    "eventos_verificados": 651,
+    "ultimo_hash": "a9c5ce03604da0f532317dfd00fbce6a2d4b3ed39417bde95f138a55d2f9eb60"
+  },
+  "prueba_manipulacion": {
+    "integra": false,
+    "eventos_verificados": 83,
+    "falla_en_evento": 84
+  },
+  "bateria_final_pct": 63.4,
+  "distancia_total_agv_m": 684.1
+}

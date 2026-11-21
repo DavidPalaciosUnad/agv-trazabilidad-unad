@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gestión AGV · Trazabilidad</title>
+<link rel="stylesheet" href="/static/estilos.css">
+</head>
+<body>
+<header class="barra">
+  <div class="marca">
+    <span class="logo">AGV</span>
+    <div>
+      <h1>Módulo de gestión y trazabilidad del transporte interno</h1>
+      <p>Prototipo de vehículo autónomo guiado de bajo costo · gemelo digital de la planta</p>
+    </div>
+  </div>
+  <div class="reloj"><span id="modo" class="chip">—</span><span id="reloj">--:--:--</span></div>
+</header>
+
+<section class="kpis" id="kpis">
+  <div class="kpi"><span class="num" id="k-traslados">0</span><span class="et">traslados manuales evitados</span></div>
+  <div class="kpi"><span class="num" id="k-masa">0</span><span class="et">kg transportados por el AGV</span></div>
+  <div class="kpi"><span class="num" id="k-ciclo">—</span><span class="et">tiempo medio de ciclo (s)</span></div>
+  <div class="kpi"><span class="num" id="k-exito">—</span><span class="et">tasa de éxito de órdenes</span></div>
+  <div class="kpi alerta"><span class="num" id="k-paradas">0</span><span class="et">paradas por obstáculo</span></div>
+  <div class="kpi"><span class="num" id="k-cadena">—</span><span class="et">integridad de la trazabilidad</span></div>
+</section>
+
+<main class="grilla">
+  <section class="panel mapa">
+    <div class="cab"><h2>Gemelo digital de la planta</h2><span class="sub">layout de referencia parametrizable</span></div>
+    <canvas id="lienzo" width="900" height="460" aria-label="Mapa de la planta con la posición del AGV"></canvas>
+    <div class="leyenda">
+      <span><i class="pt libre"></i>en ruta</span><span><i class="pt est"></i>en estación</span>
+      <span><i class="pt obs"></i>detenido por obstáculo</span><span><i class="pt emg"></i>parada de emergencia</span>
+      <span><i class="pt rep"></i>reposo</span>
+    </div>
+  </section>
+
+  <section class="panel estado">
+    <div class="cab"><h2>Estado del AGV-01</h2></div>
+    <dl class="ficha">
+      <dt>Estado</dt><dd id="e-estado">—</dd>
+      <dt>Zona de detección</dt><dd id="e-zona">—</dd>
+      <dt>Orden en curso</dt><dd id="e-orden">—</dd>
+      <dt>Último nodo → siguiente</dt><dd id="e-nodo">—</dd>
+      <dt>Velocidad</dt><dd id="e-vel">—</dd>
+      <dt>Distancia frontal</dt><dd id="e-dist">—</dd>
+      <dt>Batería</dt><dd><div class="bat"><div id="e-bat-barra"></div></div><span id="e-bat">—</span></dd>
+    </dl>
+    <div class="acciones">
+      <button class="btn adv" id="b-obst">Simular obstáculo a 1,0 m</button>
+      <button class="btn peligro" id="b-emg">Parada de emergencia</button>
+      <button class="btn" id="b-rearme">Rearme manual</button>
+    </div>
+  </section>
+
+  <section class="panel orden">
+    <div class="cab"><h2>Nueva orden de transporte</h2></div>
+    <form id="f-orden" autocomplete="off">
+      <label>Origen<select name="origen" id="s-origen" required></select></label>
+      <label>Destino<select name="destino" id="s-destino" required></select></label>
+      <label>Masa (kg)<input name="masa_kg" type="number" min="0.1" max="50" step="0.1" value="20" required></label>
+      <label>Prioridad<select name="prioridad"><option value="1">Alta</option><option value="2" selected>Media</option><option value="3">Baja</option></select></label>
+      <label>Código del solicitante<input name="solicitante" value="OP-01" maxlength="12" pattern="[A-Za-z0-9-]+" required></label>
+      <label class="ancho">Descripción del material<input name="descripcion" maxlength="200" placeholder="p. ej. láminas para corte"></label>
+      <button class="btn primario ancho" type="submit">Registrar y despachar orden</button>
+      <p id="msg-orden" class="msg"></p>
+    </form>
+  </section>
+
+  <section class="panel tabla">
+    <div class="cab"><h2>Órdenes de transporte</h2><a class="enlace" href="/api/exportar/ordenes.csv">Exportar CSV</a></div>
+    <div class="desplazable">
+      <table><thead><tr><th>Código</th><th>Ruta</th><th>Masa</th><th>Estado</th><th>Creada</th><th>Completada</th><th></th></tr></thead>
+      <tbody id="t-ordenes"></tbody></table>
+    </div>
+  </section>
+
+  <section class="panel eventos">
+    <div class="cab"><h2>Bitácora de trazabilidad (cadena SHA-256)</h2><a class="enlace" href="/api/exportar/eventos.csv">Exportar CSV</a></div>
+    <div class="desplazable">
+      <table><thead><tr><th>#</th><th>Hora</th><th>Evento</th><th>Orden</th><th>Detalle</th><th>Hash</th></tr></thead>
+      <tbody id="t-eventos"></tbody></table>
+    </div>
+  </section>
+
+  <section class="panel niosh">
+    <div class="cab"><h2>Calculadora NIOSH (línea base y posintervención)</h2></div>
+    <form id="f-niosh" autocomplete="off">
+      <label class="ancho">Tarea<input name="tarea" value="Traslado bodega → estación" maxlength="120"></label>
+      <label>L masa (kg)<input name="L" type="number" step="0.1" value="15"></label>
+      <label>H horizontal (cm)<input name="H" type="number" step="1" value="40"></label>
+      <label>V vertical (cm)<input name="V" type="number" step="1" value="30"></label>
+      <label>D desplazamiento (cm)<input name="D" type="number" step="1" value="60"></label>
+      <label>A asimetría (°)<input name="A" type="number" step="1" value="30"></label>
+      <label>F frecuencia (lev/min)<input name="F" type="number" step="0.1" value="2"></label>
+      <label>Duración (h)<input name="duracion_h" type="number" step="0.5" value="8"></label>
+      <label>Agarre<select name="agarre"><option>bueno</option><option selected>regular</option><option>malo</option></select></label>
+      <label>Momento<select name="momento"><option value="LINEA_BASE">Línea base</option><option value="POSINTERVENCION">Posintervención</option></select></label>
+      <button class="btn primario" type="submit">Calcular RWL y LI</button>
+      <p class="aviso ancho">Los valores precargados son de demostración: la línea base se registra con mediciones reales de la microempresa.</p>
+    </form>
+    <div id="r-niosh" class="resultado"></div>
+  </section>
+</main>
+<footer class="pie">Proyecto de grado · Ingeniería de Sistemas · ECBTI · Prototipo TRL 5 en entorno relevante simulado</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>
